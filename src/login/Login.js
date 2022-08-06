@@ -2,8 +2,11 @@ import styled from "styled-components";
 import track from "../imgs/track.svg";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+    const navigate = useNavigate();
+
     const [form, setForm] = useState({
         email: "",
         password: "",
@@ -14,17 +17,18 @@ export default function Login() {
 
         setForm({
             ...form,
-            [event.target.name]: [event.target.value],
+            [event.target.name]: event.target.value,
         });
+    }
 
-        console.log(form);
-
+    function sendForm(event) {
+        event.preventDefault();
         const body = {
             ...form,
         };
 
         axios
-            .Post(
+            .post(
                 "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login",
                 body
             )
@@ -51,8 +55,10 @@ export default function Login() {
                     value={form.password}
                     onChange={handleSubmit}
                 ></input>
-                <button>Entrar</button>
-                <p>Não tem uma conta? Cadastre-se!</p>
+                <button onClick={sendForm}>Entrar</button>
+                <p onClick={() => navigate("/register")}>
+                    Não tem uma conta? Cadastre-se!
+                </p>
             </form>
         </Main>
     );
@@ -96,8 +102,12 @@ const Main = styled.main`
             font-weight: 400;
             font-size: 19.976px;
             line-height: 25px;
-            color: #dbdbdb;
+            color: black;
             padding: 1.1rem;
+
+            ::placeholder {
+                color: #dbdbdb;
+            }
         }
 
         button {
@@ -108,6 +118,8 @@ const Main = styled.main`
             font-size: 20.976px;
             line-height: 26px;
             color: #ffffff;
+            border: none;
+            cursor: pointer;
         }
     }
 
@@ -118,5 +130,6 @@ const Main = styled.main`
         text-decoration-line: underline;
         color: #52b6ff;
         margin-top: 2.6rem;
+        cursor: pointer;
     }
 `;
