@@ -3,8 +3,11 @@ import track from "../imgs/track.svg";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import ContextApi from "../contextApi/ContextApi";
 
 export default function Login() {
+    const { setToken } = useContext(ContextApi);
     const navigate = useNavigate();
 
     const [form, setForm] = useState({
@@ -33,7 +36,7 @@ export default function Login() {
                 body
             )
             .then((res) => {
-                console.log(res.data);
+                setToken(res.data.token);
                 navigate("/habits");
             });
     }

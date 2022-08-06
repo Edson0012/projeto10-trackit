@@ -21,8 +21,6 @@ export default function Register() {
             ...form,
             [event.target.name]: event.target.value,
         });
-
-        console.log(form);
     }
 
     function sendForm(event) {
@@ -37,7 +35,10 @@ export default function Register() {
             body
         );
 
-        promise.then((res) => console.log(res.data));
+        promise.then((res) => {
+            console.log(res);
+            navigate("/");
+        });
     }
 
     return (
