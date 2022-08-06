@@ -32,7 +32,10 @@ export default function Login() {
                 "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login",
                 body
             )
-            .then((res) => console.log(res));
+            .then((res) => {
+                console.log(res.data);
+                navigate("/habits");
+            });
     }
 
     return (
