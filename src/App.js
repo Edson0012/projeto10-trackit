@@ -7,7 +7,8 @@ import ContextApi from "./contextApi/ContextApi";
 
 export default function App() {
     const [token, setToken] = useState("");
-    const contextValue = { token, setToken };
+    const [user, setUser] = useState({});
+    const contextValue = { token, setToken, user, setUser };
     console.log(token);
 
     return (

@@ -7,7 +7,7 @@ import { useContext } from "react";
 import ContextApi from "../contextApi/ContextApi";
 
 export default function Login() {
-    const { setToken } = useContext(ContextApi);
+    const { setUser } = useContext(ContextApi);
     const navigate = useNavigate();
 
     const [form, setForm] = useState({
@@ -36,7 +36,7 @@ export default function Login() {
                 body
             )
             .then((res) => {
-                setToken(res.data.token);
+                setUser(res.data);
                 navigate("/habits");
             });
     }
